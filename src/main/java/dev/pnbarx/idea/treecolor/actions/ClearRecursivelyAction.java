@@ -54,11 +54,7 @@ public class ClearRecursivelyAction extends AnAction {
         ProjectStateService projectStateService = ProjectStateService.getInstance(actionEvent);
         VirtualFile[] files = ActionUtils.getFiles(actionEvent);
 
-        if (projectStateService != null && projectStateService.files.isHighlightedRecursively(files)) {
-            ActionUtils.setActionEnabled(actionEvent, true);
-        } else {
-            ActionUtils.setActionEnabled(actionEvent, false);
-        }
+        ActionUtils.setActionEnabled(actionEvent, projectStateService != null && projectStateService.files.isHighlightedRecursively(files));
     }
 
     @Override

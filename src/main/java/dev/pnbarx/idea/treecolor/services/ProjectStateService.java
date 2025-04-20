@@ -58,7 +58,7 @@ public class ProjectStateService implements PersistentStateComponent<ProjectStat
     @Nullable
     public static ProjectStateService getInstance(@Nullable Project project) {
         if (project == null) return null;
-        ProjectStateService instance = ServiceManager.getService(project, ProjectStateService.class);
+        ProjectStateService instance = project.getService(ProjectStateService.class);
         instance.project = project;
         return instance;
     }

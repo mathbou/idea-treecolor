@@ -92,7 +92,7 @@ public class ColorSettingsComponent extends JPanel {
 
             List<ColorPickerListener> listeners = Collections.singletonList(new ColorChangeListener());
             Color currentColor = colorSettings.getColor();
-            Color newColor = ColorChooser.chooseColor(this, "Choose Color", currentColor, true, listeners, true);
+            Color newColor = ColorChooserService.getInstance().showDialog(this, "Choose Color", currentColor, true, listeners, true);
 
             if (newColor != null) {
                 colorSettings.setColor(newColor);

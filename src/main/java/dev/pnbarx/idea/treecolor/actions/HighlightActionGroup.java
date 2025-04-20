@@ -42,7 +42,7 @@ public class HighlightActionGroup extends ActionGroup {
 
     @NotNull
     @Override
-    public AnAction[] getChildren(@Nullable AnActionEvent actionEvent) {
+    public AnAction @NotNull [] getChildren(@Nullable AnActionEvent actionEvent) {
         ArrayList<AnAction> actionGroupItems = new ArrayList<>();
         ProjectStateService projectStateService = ProjectStateService.getInstance(actionEvent);
 

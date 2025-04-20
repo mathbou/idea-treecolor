@@ -17,7 +17,7 @@
 package dev.pnbarx.idea.treecolor.services;
 
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
@@ -40,7 +40,7 @@ public class AppStateService implements PersistentStateComponent<AppState> {
     private final AppState state = new AppState();
 
     public static AppStateService getInstance() {
-        return ServiceManager.getService(AppStateService.class);
+        return ApplicationManager.getApplication().getService(AppStateService.class);
     }
 
     @Nullable
