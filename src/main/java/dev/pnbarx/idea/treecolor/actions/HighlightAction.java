@@ -16,6 +16,7 @@
 
 package dev.pnbarx.idea.treecolor.actions;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
@@ -66,6 +67,11 @@ public class HighlightAction extends AnAction {
     public void setColorId(int colorId) {
         Presentation presentation = getTemplatePresentation();
         presentation.putClientProperty("colorId", colorId);
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
     }
 
 }
