@@ -16,6 +16,7 @@
 
 package dev.pnbarx.idea.treecolor.actions;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
@@ -58,6 +59,11 @@ public class ClearRecursivelyAction extends AnAction {
         } else {
             ActionUtils.setActionEnabled(actionEvent, false);
         }
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
     }
 
 }

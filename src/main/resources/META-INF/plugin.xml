@@ -122,7 +122,6 @@
     ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>
-    <idea-version since-build="183.2635.13"/>
     <incompatible-with>com.intellij.modules.rider</incompatible-with>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -136,8 +135,8 @@
                class="dev.pnbarx.idea.treecolor.actions.HighlightActionGroup"
                text="Highlight" description="Highlight your project files and folders"
                icon="/icons/highlight.png" popup="true">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="before" relative-to-action="AddToFavorites"/>
-            <add-to-group group-id="EditorTabPopupMenuEx" anchor="before" relative-to-action="AddToFavorites"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="popup@ExpandableBookmarkContextMenu"/>
+            <add-to-group group-id="EditorTabPopupMenuEx" anchor="after" relative-to-action="popup@ExpandableBookmarkContextMenu"/>
         </group>
     </actions>
 

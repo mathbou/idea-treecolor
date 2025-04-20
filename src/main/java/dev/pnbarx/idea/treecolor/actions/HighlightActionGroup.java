@@ -95,4 +95,9 @@ public class HighlightActionGroup extends ActionGroup {
         return actionEvent != null && ActionUtils.getFiles(actionEvent) != null;
     }
 
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
+    }
+
 }
