@@ -17,7 +17,6 @@
 package dev.pnbarx.idea.treecolor.actions;
 
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import dev.pnbarx.idea.treecolor.services.ProjectStateService;
 import dev.pnbarx.idea.treecolor.state.beans.ColorSettings;
@@ -31,8 +30,6 @@ import java.util.ArrayList;
 
 
 public class HighlightActionGroup extends ActionGroup {
-
-    private static final Logger LOG = Logger.getInstance(HighlightActionGroup.class);
 
     @Override
     public void update(@NotNull AnActionEvent actionEvent) {

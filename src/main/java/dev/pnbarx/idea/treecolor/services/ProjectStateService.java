@@ -100,16 +100,6 @@ public class ProjectStateService implements PersistentStateComponent<ProjectStat
         }
     }
 
-    public void saveAsIDEDefaults() {
-        appStateService.setColorSettingsList(state.colorSettingsList);
-        appStateService.setMarksForCollapsedHighlights(state.marksForCollapsedHighlights);
-    }
-
-    public void resetToIDEDefaults() {
-        state.colorSettingsList = appStateService.getColorSettingsList();
-        state.marksForCollapsedHighlights = appStateService.getMarksForCollapsedHighlights();
-    }
-
     public void resetToDefaults() {
         state.colorSettingsList = DefaultSettings.getColorSettingsList();
         state.marksForCollapsedHighlights = DefaultSettings.getMarksForCollapsedHighlights();

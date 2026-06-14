@@ -16,7 +16,6 @@
 
 package dev.pnbarx.idea.treecolor.providers;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.impl.EditorTabColorProvider;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
@@ -30,8 +29,6 @@ import java.awt.*;
 
 
 public class ColorProvider implements EditorTabColorProvider, DumbAware {
-
-    private static final Logger LOG = Logger.getInstance(ColorProvider.class);
 
     @Nullable
     private Color getColor(@NotNull Project project, @NotNull VirtualFile file) {

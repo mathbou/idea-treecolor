@@ -21,7 +21,6 @@ import dev.pnbarx.idea.treecolor.state.ProjectColors;
 import dev.pnbarx.idea.treecolor.services.ProjectStateService;
 import dev.pnbarx.idea.treecolor.state.beans.MarkType;
 import dev.pnbarx.idea.treecolor.ui.components.ColorSettingsComponent;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import dev.pnbarx.idea.treecolor.utils.UIUtils;
@@ -38,7 +37,6 @@ import java.util.List;
 
 public class ColorsDialog extends DialogWrapper {
 
-    private static final Logger LOG = Logger.getInstance(ColorsDialog.class);
     private static final String DIMENSION_SERVICE_KEY = "dev.pnbarx.idea.treecolor.ui.views.ColorsDialog";
     private static final Dimension INITIAL_DIALOG_SIZE = new Dimension(980, 640);
 

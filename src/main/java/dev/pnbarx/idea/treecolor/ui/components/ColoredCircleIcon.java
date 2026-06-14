@@ -16,7 +16,6 @@
 
 package dev.pnbarx.idea.treecolor.ui.components;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.ui.JBColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +27,6 @@ import java.util.HashMap;
 
 
 public class ColoredCircleIcon implements Icon {
-
-    private static final Logger LOG = Logger.getInstance(ColoredCircleIcon.class);
 
     private final int ICON_WIDTH = 16;
     private final int ICON_HEIGHT = 16;

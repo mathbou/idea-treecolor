@@ -24,7 +24,6 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import dev.pnbarx.idea.treecolor.state.beans.AppState;
 import dev.pnbarx.idea.treecolor.state.beans.ColorSettings;
@@ -44,12 +43,9 @@ public class AppStateService implements PersistentStateComponent<AppState> {
     private final AppState state = new AppState();
 
     private AppStateService() {
-        ApplicationManager.getApplication().getMessageBus().connect().subscribe(LafManagerListener.TOPIC, new LafManagerListener() {
-            @Override
-            public void lookAndFeelChanged(@NotNull com.intellij.ide.ui.LafManager source) {
-                for (Project openProject : ProjectManager.getInstance().getOpenProjects()) {
-                    UIUtils.updateUI(openProject);
-                }
+        ApplicationManager.getApplication().getMessageBus().connect().subscribe(LafManagerListener.TOPIC, (LafManagerListener) source -> {
+            for (Project openProject : ProjectManager.getInstance().getOpenProjects()) {
+                UIUtils.updateUI(openProject);
             }
         });
     }
@@ -90,15 +86,6 @@ public class AppStateService implements PersistentStateComponent<AppState> {
 
     public void setMarksForCollapsedHighlights(String marks) {
         state.marksForCollapsedHighlights = marks;
-    }
-
-    @Nullable
-    private Object cloneViaXmlSerializer(Object source) {
-        try {
-            return XmlSerializer.deserialize(XmlSerializer.serialize(source), Object.class);
-        } catch (Exception ignored) {
-            return null;
-        }
     }
 
 }

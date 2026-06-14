@@ -16,7 +16,6 @@
 
 package dev.pnbarx.idea.treecolor.ui.components;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.ui.ColorUtil;
 import com.intellij.ui.JBColor;
 import dev.pnbarx.idea.treecolor.utils.UIUtils;
@@ -34,8 +33,6 @@ import java.awt.geom.RoundRectangle2D;
 
 
 public abstract class ColoredButton extends JButton {
-
-    private static final Logger LOG = Logger.getInstance(ColoredButton.class);
 
     private static final int hPadding = 15;
     private static final int vPadding = 12;
@@ -76,7 +73,7 @@ public abstract class ColoredButton extends JButton {
     @Override
     public void setBackground(@Nullable Color color) {
         backgroundColor = color != null ? color : UIUtils.getDefaultTreeBackgroundColor();
-        foregroundColor = ColorUtil.isDark(backgroundColor) ? Color.WHITE : Color.BLACK;
+        foregroundColor = ColorUtil.isDark(backgroundColor) ? JBColor.WHITE : JBColor.BLACK;
     }
 
     @Override

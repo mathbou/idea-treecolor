@@ -17,7 +17,6 @@
 package dev.pnbarx.idea.treecolor.state;
 
 import com.intellij.openapi.util.text.NaturalComparator;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import dev.pnbarx.idea.treecolor.services.ProjectStateService;
 import dev.pnbarx.idea.treecolor.state.beans.HighlightedFile;
@@ -28,13 +27,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class ProjectFiles {
-
-    private static final Logger LOG = Logger.getInstance(ProjectFiles.class);
 
     private final ProjectStateService projectStateService;
     private final ProjectState projectState;
@@ -42,17 +37,6 @@ public class ProjectFiles {
     public ProjectFiles(ProjectStateService projectStateService) {
         this.projectStateService = projectStateService;
         this.projectState = projectStateService.getState();
-    }
-
-    public List<HighlightedFile> getHighlightedFileList() {
-        return projectState.highlightedFileList;
-    }
-
-    public List<HighlightedFile> getHighlightedFileList(String parentPath) {
-        String parentPathWithSlash = StringUtils.addTrailingSlash(parentPath);
-        return projectState.highlightedFileList.stream().filter(
-            node -> node.getPath().startsWith(parentPathWithSlash)
-        ).collect(Collectors.toList());
     }
 
     public void addNodes(@Nullable VirtualFile[] files, int colorId) {
