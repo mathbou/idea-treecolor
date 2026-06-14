@@ -17,7 +17,7 @@
 
 <idea-plugin>
     <id>fr.mathbou.treecolor</id>
-    <name>Project Tree Color Highlighter</name>
+    <name>ProjectTree Color Enhanced</name>
     <version>@version@</version>
     <vendor url="https://github.com/mathbou">Mathieu Bouzard</vendor>
 

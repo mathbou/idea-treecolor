@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@State(name = "ProjectTreeColorHighlighter", storages = {@Storage("projectTreeColorHighlighter.xml")})
+@State(name = "ProjectTreeColorEnhanced", storages = {@Storage("projectTreeColorEnhanced.xml")})
 public class AppStateService implements PersistentStateComponent<AppState> {
 
     private static final Logger LOG = Logger.getInstance(AppStateService.class);
