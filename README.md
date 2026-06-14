@@ -1,4 +1,4 @@
-# ProjectTree Color Highlighter
+# ProjectTree Color Enhanced
 
 <!-- Plugin description -->
 Highlights your project files and folders in colors.

@@ -39,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Method;
 
 
-@State(name = "ProjectTreeColorHighlighter", storages = {@Storage("highlightedFiles.xml")})
+@State(name = "ProjectTreeColorEnhanced", storages = {@Storage("highlightedFiles.xml")})
 public class ProjectStateService implements PersistentStateComponent<ProjectState> {
 
     private static final Logger LOG = Logger.getInstance(ProjectStateService.class);
