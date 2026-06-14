@@ -55,10 +55,30 @@ public class ProjectColors {
 
     @NotNull
     public ColorSettings getColorSettingsById(int colorId) {
-        return projectState.colorSettingsList.stream()
-            .filter(colorSettings -> colorSettings.getId() == colorId)
+        ColorSettings colorSettings = projectState.colorSettingsList.stream()
+            .filter(item -> item.getId() == colorId)
             .findFirst()
             .orElse(new ColorSettings(colorId, null, "Color " + colorId, false));
+        return ensureColorVariantsAreInitialized(colorSettings);
+    }
+
+    @NotNull
+    private ColorSettings ensureColorVariantsAreInitialized(@NotNull ColorSettings colorSettings) {
+        ColorSettings defaultColorSettings = DefaultSettings.getColorSettingsList().stream()
+            .filter(item -> item.getId() == colorSettings.getId())
+            .findFirst()
+            .orElse(null);
+
+        if (colorSettings.getLightColor() == null && defaultColorSettings != null) {
+            colorSettings.setLightColor(defaultColorSettings.getLightColor());
+        }
+        if (colorSettings.getDarkColor() == null && defaultColorSettings != null) {
+            colorSettings.setDarkColor(defaultColorSettings.getDarkColor());
+        }
+        if (colorSettings.getName() == null || colorSettings.getName().isBlank()) {
+            colorSettings.setName(defaultColorSettings != null ? defaultColorSettings.getName() : "Color " + colorSettings.getId());
+        }
+        return colorSettings;
     }
 
     public void setColorSettingsById(int colorId, ColorSettings colorSettings) {

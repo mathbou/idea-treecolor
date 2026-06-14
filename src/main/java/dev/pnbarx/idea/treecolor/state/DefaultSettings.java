@@ -16,10 +16,11 @@
 
 package dev.pnbarx.idea.treecolor.state;
 
-import com.intellij.ui.JBColor;
 import dev.pnbarx.idea.treecolor.state.beans.ColorSettings;
 import dev.pnbarx.idea.treecolor.state.beans.MarkType;
+import dev.pnbarx.idea.treecolor.utils.ColorVariantUtil;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,15 +28,20 @@ import java.util.List;
 public class DefaultSettings {
     public static List<ColorSettings> getColorSettingsList() {
         return new ArrayList<>(Arrays.asList(
-                new ColorSettings(1, new JBColor(0xde2c2c, 0x4f060d), "Color 1", true),
-                new ColorSettings(2, new JBColor(0xff6d0d, 0x44220e), "Color 2", true),
-                new ColorSettings(3, new JBColor(0xfefc22, 0x3f371b), "Color 3", true),
-                new ColorSettings(4, new JBColor(0x28ff2e, 0x162c16), "Color 4", true),
-                new ColorSettings(5, new JBColor(0x00f2ff, 0x0f2f47), "Color 5", true),
-                new ColorSettings(6, new JBColor(0x00b5ff, 0x171a34), "Color 6", true),
-                new ColorSettings(7, new JBColor(0xb892db, 0x311333), "Color 7", true),
-                new ColorSettings(8, new JBColor(0xbebebe, 0x1e1e1e), "Color 8", true)
+                pastel(1, 0xf4b5b5, "Color 1"),
+                pastel(2, 0xf2c9a6, "Color 2"),
+                pastel(3, 0xf4efac, "Color 3"),
+                pastel(4, 0xbfe9c1, "Color 4"),
+                pastel(5, 0xaeebf0, "Color 5"),
+                pastel(6, 0xb2d7f2, "Color 6"),
+                pastel(7, 0xd7b7ef, "Color 7"),
+                pastel(8, 0xe4e4e4, "Color 8")
         ));
+    }
+
+    private static ColorSettings pastel(int id, int lightRgb, String name) {
+        Color lightColor = new Color(lightRgb);
+        return new ColorSettings(id, lightColor, ColorVariantUtil.deriveDarkColor(lightColor), name, true);
     }
 
     public static String getMarksForCollapsedHighlights() {

@@ -45,7 +45,7 @@ public class ColorProvider implements EditorTabColorProvider, DumbAware {
         ColorSettings colorSettings = projectStateService.colors.getColorSettingsById(colorId);
         if (!colorSettings.isSetAndEnabled()) return null;
 
-        return colorSettings.getColor();
+        return colorSettings.getColorForCurrentTheme();
     }
 
     @Nullable
