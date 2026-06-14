@@ -30,7 +30,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
 
 
@@ -77,7 +76,7 @@ public abstract class ColoredButton extends JButton {
     @Override
     public void setBackground(@Nullable Color color) {
         backgroundColor = color != null ? color : UIUtils.getDefaultTreeBackgroundColor();
-        foregroundColor = ColorUtil.isDark(backgroundColor) ? JBColor.WHITE : JBColor.BLACK;
+        foregroundColor = ColorUtil.isDark(backgroundColor) ? Color.WHITE : Color.BLACK;
     }
 
     @Override
@@ -89,11 +88,42 @@ public abstract class ColoredButton extends JButton {
         return new ColoredButtonUI();
     }
 
+    protected Color getButtonBorderColor() {
+        return new JBColor(0x999999, 0x777777);
+    }
+
+    protected Color getButtonFocusedBorderColor() {
+        return new JBColor(0x555555, 0xaaaaaa);
+    }
+
+    protected float getButtonBorderWidth() {
+        return 3.0f;
+    }
+
+    protected float getButtonBorderTopWidth() {
+        return getButtonBorderWidth();
+    }
+
+    protected float getButtonBorderRightWidth() {
+        return getButtonBorderWidth();
+    }
+
+    protected float getButtonBorderBottomWidth() {
+        return getButtonBorderWidth();
+    }
+
+    protected float getButtonBorderLeftWidth() {
+        return getButtonBorderWidth();
+    }
+
+    protected int getButtonArcSize() {
+        return 20;
+    }
+
 
     protected static class ColoredButtonUI extends BasicButtonUI {
 
         private static final float fontSize = 12.0f;
-        private static final float borderWidth = 0.5f;
 
         @Override
         protected void installDefaults(final AbstractButton button) {
@@ -113,7 +143,11 @@ public abstract class ColoredButton extends JButton {
 
                 int width = button.getWidth();
                 int height = button.getHeight();
-                int arcSize = getArcSize();
+                int arcSize = getArcSize(button);
+                float topBorderWidth = button.getButtonBorderTopWidth();
+                float rightBorderWidth = button.getButtonBorderRightWidth();
+                float bottomBorderWidth = button.getButtonBorderBottomWidth();
+                float leftBorderWidth = button.getButtonBorderLeftWidth();
 
                 if (button.isOpaque()) {
                     g2d.setColor(button.getBackground());
@@ -126,21 +160,19 @@ public abstract class ColoredButton extends JButton {
                 g2d.setColor(getBackgroundColor(button));
                 g2d.fill(outerShape);
 
-                if (model.isRollover()) {
-                    g2d.setColor(getFocusedBorderColor(button));
-                } else {
-                    g2d.setColor(getBorderColor(button));
+                g2d.setColor(model.isRollover() ? getFocusedBorderColor(button) : getBorderColor(button));
+                if (topBorderWidth > 0f) {
+                    g2d.fill(new Rectangle(0, 0, width, Math.round(topBorderWidth)));
                 }
-
-                Path2D border = new Path2D.Float(Path2D.WIND_EVEN_ODD);
-                border.append(outerShape, false);
-                //noinspection SuspiciousNameCombination
-                border.append(new RoundRectangle2D.Float(
-                    borderWidth, borderWidth,
-                    width - borderWidth * 2, height - borderWidth * 2,
-                    arcSize - borderWidth, arcSize - borderWidth
-                ), false);
-                g2d.fill(border);
+                if (rightBorderWidth > 0f) {
+                    g2d.fill(new Rectangle(width - Math.round(rightBorderWidth), 0, Math.round(rightBorderWidth), height));
+                }
+                if (bottomBorderWidth > 0f) {
+                    g2d.fill(new Rectangle(0, height - Math.round(bottomBorderWidth), width, Math.round(bottomBorderWidth)));
+                }
+                if (leftBorderWidth > 0f) {
+                    g2d.fill(new Rectangle(0, 0, Math.round(leftBorderWidth), height));
+                }
 
             } finally {
                 g2d.dispose();
@@ -154,16 +186,15 @@ public abstract class ColoredButton extends JButton {
         }
 
         protected Color getBorderColor(@NotNull ColoredButton button) {
-            return new JBColor(0x999999, 0x777777);
+            return button.getButtonBorderColor();
         }
 
         protected Color getFocusedBorderColor(@NotNull ColoredButton button) {
-            return new JBColor(0x555555, 0xaaaaaa);
+            return button.getButtonFocusedBorderColor();
         }
 
-        @SuppressWarnings("SameReturnValue")
-        protected int getArcSize() {
-            return 20;
+        protected int getArcSize(@NotNull ColoredButton button) {
+            return button.getButtonArcSize();
         }
     }
 

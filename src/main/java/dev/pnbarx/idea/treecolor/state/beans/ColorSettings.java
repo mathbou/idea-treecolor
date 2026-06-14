@@ -16,6 +16,7 @@
 
 package dev.pnbarx.idea.treecolor.state.beans;
 
+import com.intellij.ide.ui.LafManager;
 import com.intellij.ui.ColorUtil;
 import com.intellij.util.xmlb.Converter;
 import com.intellij.util.xmlb.annotations.Attribute;
@@ -35,8 +36,11 @@ public class ColorSettings {
     @Attribute("id")
     public int _id;
 
-    @Attribute(value = "value", converter = ColorHexConverter.class)
-    public Color _color;
+    @Attribute(value = "lightValue", converter = ColorHexConverter.class)
+    public Color _lightColor;
+
+    @Attribute(value = "darkValue", converter = ColorHexConverter.class)
+    public Color _darkColor;
 
     @Attribute("name")
     public String _name;
@@ -44,23 +48,34 @@ public class ColorSettings {
     @Attribute("enabled")
     public boolean _enabled;
 
+    @Attribute("linked")
+    public boolean _linked = true;
+
     // an empty constructor is needed for PersistentStateComponent xml serialization
     @SuppressWarnings({"UnusedDeclaration"})
     public ColorSettings() {
     }
 
     public ColorSettings(int id, Color color, String name, boolean isEnabled) {
+        this(id, color, color, name, isEnabled);
+    }
+
+    public ColorSettings(int id, Color lightColor, Color darkColor, String name, boolean isEnabled) {
         setId(id);
-        setColor(color);
+        setLightColor(lightColor);
+        setDarkColor(darkColor);
         setName(name);
         setEnabled(isEnabled);
+        setLinked(true);
     }
 
     public ColorSettings(ColorSettings colorSettings) {
         setId(colorSettings.getId());
-        setColor(colorSettings.getColor());
+        setLightColor(colorSettings.getLightColor());
+        setDarkColor(colorSettings.getDarkColor());
         setName(colorSettings.getName());
         setEnabled(colorSettings.isEnabled());
+        setLinked(colorSettings.isLinked());
     }
 
     @Transient
@@ -74,11 +89,42 @@ public class ColorSettings {
 
     @Transient
     public Color getColor() {
-        return _color;
+        return getColorForCurrentTheme();
     }
 
     public void setColor(Color color) {
-        this._color = color;
+        setColorForCurrentTheme(color);
+    }
+
+    @Transient
+    public Color getColorForCurrentTheme() {
+        return isDarkTheme() ? getDarkColor() : getLightColor();
+    }
+
+    public void setColorForCurrentTheme(Color color) {
+        if (isDarkTheme()) {
+            setDarkColor(color);
+        } else {
+            setLightColor(color);
+        }
+    }
+
+    @Transient
+    public Color getLightColor() {
+        return _lightColor;
+    }
+
+    public void setLightColor(Color color) {
+        _lightColor = color;
+    }
+
+    @Transient
+    public Color getDarkColor() {
+        return _darkColor;
+    }
+
+    public void setDarkColor(Color color) {
+        _darkColor = color;
     }
 
     @Transient
@@ -100,8 +146,21 @@ public class ColorSettings {
     }
 
     @Transient
+    public boolean isLinked() {
+        return _linked;
+    }
+
+    public void setLinked(boolean linked) {
+        this._linked = linked;
+    }
+
+    @Transient
     public boolean isSetAndEnabled() {
-        return _enabled && _color != null;
+        return _enabled && getLightColor() != null && getDarkColor() != null;
+    }
+
+    private static boolean isDarkTheme() {
+        return LafManager.getInstance().getCurrentUIThemeLookAndFeel().isDark();
     }
 
 

@@ -39,8 +39,8 @@ import java.util.List;
 public class ColorsDialog extends DialogWrapper {
 
     private static final Logger LOG = Logger.getInstance(ColorsDialog.class);
-
-    public static final int DISPOSE_EXIT_CODE = 0xD1;
+    private static final String DIMENSION_SERVICE_KEY = "dev.pnbarx.idea.treecolor.ui.views.ColorsDialog";
+    private static final Dimension INITIAL_DIALOG_SIZE = new Dimension(980, 640);
 
     private final Project project;
     private final ProjectStateService projectStateService;
@@ -102,20 +102,26 @@ public class ColorsDialog extends DialogWrapper {
         return dialogPanel;
     }
 
+    @Override
+    protected @Nullable String getDimensionServiceKey() {
+        return DIMENSION_SERVICE_KEY;
+    }
+
+    @Override
+    public @Nullable Dimension getInitialSize() {
+        return INITIAL_DIALOG_SIZE;
+    }
+
     @NotNull
     @Override
     protected Action @NotNull [] createLeftSideActions() {
         return new Action[]{
-            new AbstractAction("Manage Color Settings...") {
+            new AbstractAction("Reset colors to factory defaults") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DialogWrapper manageSettingsDialog = new ManageSettingsDialog(project);
-                    manageSettingsDialog.show();
+                    projectStateService.resetToDefaults();
                     update();
-
-                    if (manageSettingsDialog.getExitCode() == DISPOSE_EXIT_CODE) {
-                        dispose();
-                    }
+                    UIUtils.updateUI(project);
                 }
             },
         };

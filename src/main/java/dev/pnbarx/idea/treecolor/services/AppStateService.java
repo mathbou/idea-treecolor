@@ -16,15 +16,19 @@
 
 package dev.pnbarx.idea.treecolor.services;
 
+import com.intellij.ide.ui.LafManagerListener;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import dev.pnbarx.idea.treecolor.state.beans.AppState;
 import dev.pnbarx.idea.treecolor.state.beans.ColorSettings;
+import dev.pnbarx.idea.treecolor.utils.UIUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,6 +42,17 @@ public class AppStateService implements PersistentStateComponent<AppState> {
     private static final Logger LOG = Logger.getInstance(AppStateService.class);
 
     private final AppState state = new AppState();
+
+    private AppStateService() {
+        ApplicationManager.getApplication().getMessageBus().connect().subscribe(LafManagerListener.TOPIC, new LafManagerListener() {
+            @Override
+            public void lookAndFeelChanged(@NotNull com.intellij.ide.ui.LafManager source) {
+                for (Project openProject : ProjectManager.getInstance().getOpenProjects()) {
+                    UIUtils.updateUI(openProject);
+                }
+            }
+        });
+    }
 
     public static AppStateService getInstance() {
         return ApplicationManager.getApplication().getService(AppStateService.class);
