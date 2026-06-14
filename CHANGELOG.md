@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 2.0.0
+- Upgraded the build and plugin setup for Gradle 9.5, Kotlin 2.3, and JVM 21.
+- Reworked color settings for theme-aware light/dark variants and improved dialog behavior.
+- Added live color-swatch preview updates while using the color picker.
+- Added per-color reset actions.
+- Refactored the package structure and refreshed copyright/branding.
+- Removed deprecated code and simplified UI initialization and logger usage.
+
+## 1.2.2
+- Support for 2021.1.* and above
+
+## 1.2.1 
+- Support for 2021.1
+
 ## 1.2.0
 - The code has been significantly refactored and optimised
 - No more blinking while reindexing
