@@ -16,7 +16,6 @@
 
 package dev.pnbarx.idea.treecolor.state;
 
-import com.intellij.openapi.diagnostic.Logger;
 import dev.pnbarx.idea.treecolor.services.ProjectStateService;
 import dev.pnbarx.idea.treecolor.state.beans.ColorSettings;
 import dev.pnbarx.idea.treecolor.state.beans.ProjectState;
@@ -27,8 +26,6 @@ import java.util.List;
 
 
 public class ProjectColors {
-
-    private static final Logger LOG = Logger.getInstance(ProjectColors.class);
 
     public static final int NUMBER_OF_COLOR_PRESETS = 16;
 

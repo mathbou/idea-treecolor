@@ -122,7 +122,6 @@
     ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>
-    <incompatible-with>com.intellij.modules.rider</incompatible-with>
 
     <extensions defaultExtensionNs="com.intellij">
         <editorTabColorProvider implementation="dev.pnbarx.idea.treecolor.providers.ColorProvider" order="first"/>

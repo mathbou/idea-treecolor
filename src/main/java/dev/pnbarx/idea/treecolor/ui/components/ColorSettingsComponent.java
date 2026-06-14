@@ -31,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -53,8 +52,6 @@ public class ColorSettingsComponent extends JPanel {
     private final int colorId;
     private ColorSettings colorSettings;
 
-    private final JPanel headerPanel;
-    private final JPanel headerControlsPanel;
     private final JLabel colorNameLabel;
     private final ColorChooserButton lightColorChooserButton;
     private final ColorChooserButton darkColorChooserButton;
@@ -74,13 +71,13 @@ public class ColorSettingsComponent extends JPanel {
         this.colorId = colorId;
         this.colorSettings = colors.getColorSettingsById(colorId);
 
-        headerPanel = new JPanel(new BorderLayout(4, 0));
-        headerPanel.setBorder(new EmptyBorder(2, 0, 0, 0));
-        headerControlsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 4, 0));
+        JPanel headerPanel = new JPanel(new BorderLayout(4, 0));
+        headerPanel.setBorder(JBUI.Borders.emptyTop(2));
+        JPanel headerControlsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 4, 0));
         headerControlsPanel.setOpaque(false);
 
         colorNameLabel = new JLabel("", SwingConstants.CENTER);
-        colorNameLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
+        colorNameLabel.setBorder(JBUI.Borders.empty());
 
         lightColorChooserButton = new ColorChooserButton(ThemeVariant.LIGHT);
         darkColorChooserButton = new ColorChooserButton(ThemeVariant.DARK);
@@ -101,7 +98,7 @@ public class ColorSettingsComponent extends JPanel {
         linkVariantsButton.setSelected(true);
         linkVariantsButton.setFocusable(false);
         linkVariantsButton.setToolTipText("Link light and dark colors");
-        linkVariantsButton.setMargin(new Insets(0, 0, 0, 0));
+        linkVariantsButton.setMargin(JBUI.emptyInsets());
         linkVariantsButton.setBorderPainted(false);
         linkVariantsButton.setContentAreaFilled(false);
         linkVariantsButton.setOpaque(false);
@@ -132,8 +129,8 @@ public class ColorSettingsComponent extends JPanel {
         enabledCheckbox.setFocusable(false);
         enabledCheckbox.setToolTipText("Enabled");
         enabledCheckbox.addActionListener(this::enabledCheckboxHandle);
-        enabledCheckbox.setBorder(new EmptyBorder(0, 0, 0, 0));
-        enabledCheckbox.setMargin(new Insets(0, 0, 0, 0));
+        enabledCheckbox.setBorder(JBUI.Borders.empty());
+        enabledCheckbox.setMargin(JBUI.emptyInsets());
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         buttonPanel.add(lightColorChooserButton);
@@ -339,7 +336,7 @@ public class ColorSettingsComponent extends JPanel {
         private Color toDisabledColor(@Nullable Color color) {
             if (color == null) return null;
             int gray = (int) (color.getRed() * 0.299 + color.getGreen() * 0.587 + color.getBlue() * 0.114);
-            int clampedGray = Math.max(0, Math.min(255, (gray + 170) / 2));
+            int clampedGray = Math.clamp((gray + 170) / 2, 0, 255);
             return new Color(clampedGray, clampedGray, clampedGray, color.getAlpha());
         }
 

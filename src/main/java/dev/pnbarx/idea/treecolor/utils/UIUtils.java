@@ -18,7 +18,6 @@ package dev.pnbarx.idea.treecolor.utils;
 
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.ide.projectView.impl.AbstractProjectViewPane;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -31,8 +30,6 @@ import java.awt.*;
 
 
 public class UIUtils {
-
-    private static final Logger LOG = Logger.getInstance(UIUtils.class);
 
     private static volatile long lastInvokeTimeMs = 0;
     private static volatile long lastUpdateTimeMs = 0;
