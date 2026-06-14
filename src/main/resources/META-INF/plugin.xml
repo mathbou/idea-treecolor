@@ -1,5 +1,6 @@
 <!--
   ~ Copyright (c) 2018-2020 Pavel Barykin.
+  ~ Copyright (c) 2026 Mathieu Bouzard.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,123 +16,22 @@
   -->
 
 <idea-plugin>
-    <id>dev.pnbarx.idea.treecolor</id>
-    <name>ProjectTree Color Highlighter</name>
+    <id>fr.mathbou.treecolor</id>
+    <name>Project Tree Color Highlighter</name>
     <version>@version@</version>
-    <vendor url="https://github.com/pnbarx">Pavel Barykin</vendor>
-
-    <description><![CDATA[
-        Highlights your project files and folders in colors.
-        <br/>
-        <br/>
-
-        <img src="https://raw.githubusercontent.com/pnbarx/idea-treecolor/master/images/highlight-menu.png" alt="Highlight menu">
-        <br/>
-        <br/>
-
-        When you are working on a large complex project you may need to highlight
-        some of its parts in different colors.
-        <br/>
-        <br/>
-
-        Previously, there was only one way to do this:
-        create a scope, specify its name and filename pattern, then add a color
-        and attach it to the created scope, then click <code>Ok</code> and <code>Apply</code>
-        to see how it looks now. If the color doesn't fit, double-click it, select a new color,
-        click <code>OK</code> and <code>Apply</code> again to see the changes. If the color
-        doesn't fit again - repeat until it fits.
-        This is a rather inconvenient way (and takes a lot of time).
-        <br/>
-        <br/>
-
-        <strong>ProjectTree Color Highlighter</strong> was made to get rid of this inconvenience.
-        Highlight your files and folders with ease using the context menu. Adjust the colors
-        using the color picker, get an instant preview of the project tree and editor tabs
-        while adjusting.
-        <br/>
-        <br/>
-
-        <img src="https://raw.githubusercontent.com/pnbarx/idea-treecolor/master/images/color-adjustment.gif" alt="Color adjustment">
-        <br/>
-        <br/>
-
-        All settings are persistently stored in the <code><nobr>.idea/highlightedFiles.xml</nobr></code>,
-        so you can read and change it externally, clone or copy-paste to other projects, etc.
-        (This allows you to create various project boilerplates with predefined highlighting settings.)
-        <br/>
-        <br/>
-
-        <img src="https://raw.githubusercontent.com/pnbarx/idea-treecolor/master/images/config-file.png" alt="Config file">
-        <br/>
-        <br/>
-        <br/>
-
-        Enjoy and write a lot of awesome code!
-        <br/>
-        <br/>
-
-    ]]></description>
-
-    <change-notes><![CDATA[
-        <ul>
-            <li>
-                1.2.0
-                <ul>
-                    <li type="disc">
-                        The code has been significantly refactored and optimised
-                    </li>
-                    <li type="disc">
-                        No more blinking while reindexing
-                    </li>
-                    <li type="disc">
-                        Now we can override scope colors
-                    </li>
-                    <li type="disc">
-                        New "Manage Color Settings" dialog:
-                        <ul>
-                            <li type="disc">Save current colors as IDE defaults</li>
-                            <li type="disc">Open the project settings configuration file</li>
-                            <li type="disc">Load IDE defaults</li>
-                            <li type="disc">Reset colors to factory defaults</li>
-                        </ul>
-                    </li>
-                    <li type="disc">
-                        Marks for current color in Highlight menu
-                    </li>
-                    <li type="disc">
-                        Highlight option was added to editor tabs menu
-                    </li>
-                    <li type="disc">
-                        Minor backward-compatible highlightedFiles.xml format enhancement
-                    </li>
-                    <li type="disc">
-                        Support for 2020.3
-                    </li>
-                </ul>
-            </li>
-            <li>
-                1.1.2 Support for 2020.2
-            </li>
-            <li>
-                1.1.1 Bug fixes
-            </li>
-            <li>
-                1.1.0 Initial public release
-            </li>
-        </ul>
-    ]]></change-notes>
+    <vendor url="https://github.com/mathbou">Mathieu Bouzard</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <editorTabColorProvider implementation="dev.pnbarx.idea.treecolor.providers.ColorProvider" order="first"/>
-        <projectService serviceImplementation="dev.pnbarx.idea.treecolor.services.ProjectStateService"/>
-        <applicationService serviceImplementation="dev.pnbarx.idea.treecolor.services.AppStateService"/>
+        <editorTabColorProvider implementation="fr.mathbou.treecolor.providers.ColorProvider" order="first"/>
+        <projectService serviceImplementation="fr.mathbou.treecolor.services.ProjectStateService"/>
+        <applicationService serviceImplementation="fr.mathbou.treecolor.services.AppStateService"/>
     </extensions>
 
     <actions>
-        <group id="dev.pnbarx.idea.treecolor.actions.HighlightActionGroup"
-               class="dev.pnbarx.idea.treecolor.actions.HighlightActionGroup"
+        <group id="actions.fr.mathbou.treecolor.HighlightActionGroup"
+               class="fr.mathbou.treecolor.actions.HighlightActionGroup"
                text="Highlight" description="Highlight your project files and folders"
                icon="/icons/highlight.png" popup="true">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="popup@ExpandableBookmarkContextMenu"/>
