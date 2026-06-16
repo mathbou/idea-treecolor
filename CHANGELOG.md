@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## 2.1.0
+- Added automatic migration on plugin load for legacy `highlightedFiles.xml` data from `ProjectTree Color Highlighter`.
+
 ## 2.0.0
 - Upgraded the build and plugin setup for Gradle 9.5, Kotlin 2.3, and JVM 21.
 - Reworked color settings for theme-aware light/dark variants and improved dialog behavior.

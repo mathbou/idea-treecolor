@@ -43,6 +43,11 @@ public class UIUtils {
         });
     }
 
+    public static void refreshNow(@Nullable Project project) {
+        updateProjectView(project);
+        updateOpenTabs(project);
+    }
+
     public static void updateOpenTabs(@Nullable Project project) {
         if (project == null) return;
         FileEditorManagerEx editorManagerEx = FileEditorManagerEx.getInstanceEx(project);

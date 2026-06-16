@@ -27,6 +27,7 @@
         <editorTabColorProvider implementation="fr.mathbou.treecolor.providers.ColorProvider" order="first"/>
         <projectService serviceImplementation="fr.mathbou.treecolor.services.ProjectStateService"/>
         <applicationService serviceImplementation="fr.mathbou.treecolor.services.AppStateService"/>
+        <postStartupActivity implementation="fr.mathbou.treecolor.startup.LegacyMigrationStartupActivity"/>
     </extensions>
 
     <actions>
