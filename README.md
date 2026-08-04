@@ -1,5 +1,10 @@
 # ProjectTree Color Enhanced
 
+![badge](https://shieldcn.dev/badge/Made%20with%20AI-red.svg?logo=ri%3ATbBrandGithubCopilot)
+
+[![JetBrains Plugin Downloads](https://img.shields.io/jetbrains/plugin/d/32284-projecttree-color-enhanced?logo=jetbrains&label=Downloads&color=blue)](https://plugins.jetbrains.com/plugin/32284-projecttree-color-enhanced/)
+[![](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](http://apache.org/licenses/LICENSE-2.0)
+
 <!-- Plugin description -->
 Highlights your project files and folders in colors.
 <!-- Plugin description end -->
