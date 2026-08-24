@@ -9,6 +9,8 @@
 Highlights your project files and folders in colors.
 <!-- Plugin description end -->
 
+https://github.com/user-attachments/assets/2c6011da-e94d-482b-846f-dbdf7901bd61
+
 For those looking for the compiled version, you can find it in the **[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32284-projecttree-color-enhanced/)** or install it directly from your
 IDE's plugin manager.
 
@@ -49,7 +51,7 @@ tabs while adjusting:
 
 - Colors are theme-aware, so you can have different colors for light and dark themes:
 
-    ![theme-aware.avif](images/theme-aware.gif)
+    ![theme-aware.gif](images/theme-aware.gif)
 
 - All settings are persistently stored in the `.idea/highlightedFiles.xml`, so you can read and change it externally,
 clone or copy-paste to other projects, etc. (This allows you to create various project boilerplates with predefined
